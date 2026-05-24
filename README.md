@@ -9,6 +9,7 @@ crackme ladders.
 git clone https://github.com/adonese/crackme.git
 cd crackme
 ./launchpad list
+./launchpad view
 ./launchpad wine
 ./launchpad ghidra
 ```
@@ -22,6 +23,8 @@ Use a VM, container, or isolated Wine prefix for unknown binaries.
 - `practice/` - broad local mirrors and indexes for crackmes.one, pwn.college,
   Nightmare, and hosted-platform references.
 - `launchpad` and `launchpads/` - Wine and Ghidra launch helpers.
+- `tools/repo_viewer.py` - local browser for Markdown, HTML, PDFs, images,
+  source files, and binary metadata.
 - `docs/TOOLS.md` - launcher and tool setup notes.
 
 ## Original Guided Set

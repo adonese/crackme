@@ -8,12 +8,14 @@ usage() {
 Usage:
   ./launchpad wine [path]       Run a Windows crackme through Wine
   ./launchpad ghidra [args...]  Start Ghidra
+  ./launchpad view [port]       Browse local Markdown/HTML/practice files
   ./launchpad list              List likely challenge binaries
 
 Examples:
   ./launchpad wine
   ./launchpad wine crackmes/crackme_4_psyr3n/PIDXploit.exe
   ./launchpad ghidra
+  ./launchpad view
 USAGE
 }
 
@@ -26,6 +28,15 @@ case "$cmd" in
   ghidra)
     shift
     exec "$ROOT/launchpads/ghidra.sh" "$@"
+    ;;
+  view)
+    shift
+    if [[ "${1:-}" =~ ^[0-9]+$ ]]; then
+      port="$1"
+      shift
+      exec python3 "$ROOT/tools/repo_viewer.py" --port "$port" "$@"
+    fi
+    exec python3 "$ROOT/tools/repo_viewer.py" "$@"
     ;;
   list)
     find "$ROOT/crackmes" "$ROOT/practice" -type f \

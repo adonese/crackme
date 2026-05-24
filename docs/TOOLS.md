@@ -41,3 +41,28 @@ export GHIDRA_HOME=/path/to/ghidra
 
 Ghidra project databases are intentionally ignored. Create/import projects locally from
 the binaries in `crackmes/` and `practice/`.
+
+## Repo Viewer
+
+Run:
+
+```sh
+./launchpad view
+```
+
+Or choose a port:
+
+```sh
+./launchpad view 8787
+```
+
+Run without opening a browser automatically:
+
+```sh
+./launchpad view 8787 --no-browser
+```
+
+The viewer is a local Python server for browsing the repo. It indexes Markdown,
+HTML, source files, PDFs, images, archives, and binaries; renders Markdown and
+source files; previews HTML/PDF/image files; and shows basic metadata for
+binaries. It has no required third-party Python dependencies.
