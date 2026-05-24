@@ -24,7 +24,7 @@ Use a VM, container, or isolated Wine prefix for unknown binaries.
   Nightmare, and hosted-platform references.
 - `launchpad` and `launchpads/` - Wine and Ghidra launch helpers.
 - `tools/repo_viewer.py` - local browser for Markdown, HTML, PDFs, images,
-  source files, and binary metadata.
+  source files, and binary metadata. Python tooling runs through `uv`.
 - `docs/TOOLS.md` - launcher and tool setup notes.
 
 ## Original Guided Set
@@ -55,5 +55,7 @@ For a broader map, read `practice/INDEX.md` and `practice/CURATION.md`.
 
 - Ghidra project databases, lock files, and Wine prefixes are ignored so clones
   stay portable.
+- Python tooling uses `uv`; run `./launchpad view` to let `uv` resolve the
+  viewer script dependencies.
 - Binary artifacts are marked as binary in `.gitattributes` to avoid noisy diffs.
 - crackmes.one archives use the password `crackmes.one`.

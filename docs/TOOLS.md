@@ -65,4 +65,5 @@ Run without opening a browser automatically:
 The viewer is a local Python server for browsing the repo. It indexes Markdown,
 HTML, source files, PDFs, images, archives, and binaries; renders Markdown and
 source files; previews HTML/PDF/image files; and shows basic metadata for
-binaries. It has no required third-party Python dependencies.
+binaries. It runs through `uv`, and the script metadata asks `uv` to install
+Pygments for source highlighting.

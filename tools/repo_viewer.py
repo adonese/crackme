@@ -1,4 +1,10 @@
-#!/usr/bin/env python3
+#!/usr/bin/env -S uv run --script
+# /// script
+# requires-python = ">=3.11"
+# dependencies = [
+#   "pygments>=2.17",
+# ]
+# ///
 """Small local renderer/index for this crackme practice repository."""
 
 from __future__ import annotations
