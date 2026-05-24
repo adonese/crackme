@@ -24,3 +24,4 @@ core.*
 *.dmp
 *.log
 *.tmp
+tmp.ggc

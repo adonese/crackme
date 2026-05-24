@@ -12,7 +12,7 @@ file as the front door.
 | `practice/crackmes/` | Extra standalone crackmes, currently selected crackmes.one downloads. |
 | `practice/ctf/` | CTF challenge packs. Expect handouts, source, writeups, and spoiler files. |
 | `practice/courses/` | Larger mirrored courses such as pwn.college and Nightmare. |
-| `docs/` | Setup notes, this map, the Ghidra import tutorial, and the hash manifest. |
+| `docs/` | Setup notes, this map, Wine audit results, the Ghidra import tutorial, and the hash manifest. |
 | `tools/` | Local Python helpers. They run through `uv`. |
 | `launchpad` | Main entry point for Wine, Ghidra, viewer, maps, and inventory checks. |
 
@@ -40,6 +40,7 @@ file as the front door.
 ./launchpad map
 ./launchpad view
 ./launchpad list
+./launchpad wine-audit
 ./launchpad inventory verify
 ```
 

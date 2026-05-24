@@ -7,6 +7,7 @@ usage() {
   cat <<'USAGE'
 Usage:
   ./launchpad wine [path]       Run a Windows crackme through Wine
+  ./launchpad wine-audit        Smoke-test Windows app files with Wine
   ./launchpad ghidra [file]     Start Ghidra, or import/open one executable
   ./launchpad install-ghidra     Install a global ghidra wrapper in ~/.local/bin
   ./launchpad view [port]       Browse local Markdown/HTML/practice files
@@ -18,6 +19,7 @@ Examples:
   ./launchpad map
   ./launchpad wine
   ./launchpad wine crackmes/crackme_4_psyr3n/PIDXploit.exe
+  ./launchpad wine-audit
   ./launchpad ghidra crackmes/crackme_1_TLOD/EasyCrackMe.exe
   ./launchpad install-ghidra
   ./launchpad view
@@ -30,6 +32,14 @@ case "$cmd" in
   wine)
     shift
     exec "$ROOT/launchpads/wine.sh" "$@"
+    ;;
+  wine-audit)
+    shift
+    if ! command -v uv >/dev/null 2>&1; then
+      echo "uv is required for ./launchpad wine-audit. Install it from https://docs.astral.sh/uv/." >&2
+      exit 1
+    fi
+    exec uv run --script "$ROOT/tools/wine_audit.py" "$@"
     ;;
   ghidra)
     shift

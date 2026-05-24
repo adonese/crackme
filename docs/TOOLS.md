@@ -1,6 +1,6 @@
 # Tool Launchers
 
-This repo includes two thin launchers so a fresh clone has a predictable entry point.
+This repo includes thin launchers so a fresh clone has a predictable entry point.
 
 ## Wine
 
@@ -17,6 +17,18 @@ Run a specific crackme:
 ```
 
 The launcher uses a repo-local Wine prefix at `.wine-prefix/`, which is ignored by git.
+Prefer this wrapper over raw `wine path/to/file.exe`; some crackmes expect
+sidecar files in their current working directory.
+
+Run a bounded Wine smoke test for Windows app files:
+
+```sh
+./launchpad wine-audit
+```
+
+The audit runs each executable from its own directory so sidecar files such as
+`password.bin` are visible. It covers `.exe` files plus renamed executables such
+as `*.exe.bin`, skips DLLs, and writes `docs/WINE_AUDIT.md`.
 
 ## Ghidra
 

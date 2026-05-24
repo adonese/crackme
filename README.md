@@ -12,6 +12,7 @@ cd crackme
 ./launchpad list
 ./launchpad view
 ./launchpad wine crackmes/crackme_1_TLOD/EasyCrackMe.exe
+./launchpad wine-audit
 ./launchpad ghidra crackmes/crackme_1_TLOD/EasyCrackMe.exe
 ```
 
@@ -28,7 +29,9 @@ Use a VM, container, or isolated Wine prefix for unknown binaries.
 - `launchpad` and `launchpads/` - Wine and Ghidra launch helpers.
 - `tools/repo_viewer.py` - local browser for Markdown, HTML, PDFs, images,
   source files, and binary metadata. Python tooling runs through `uv`.
-- `docs/TOOLS.md` - launcher, Ghidra, Wine, and inventory notes.
+- `docs/TOOLS.md` - launcher, Ghidra, Wine, audit, and inventory notes.
+- `docs/WINE_AUDIT.md` - latest bounded Wine smoke-test results for Windows app
+  files.
 
 ## Original Guided Set
 
@@ -59,7 +62,7 @@ For a broader map, read `docs/MAP.md`, `practice/INDEX.md`, and
 
 - Ghidra project databases, lock files, and Wine prefixes are ignored so clones
   stay portable.
-- Python tooling uses `uv`; run `./launchpad view` to let `uv` resolve the
-  viewer script dependencies.
+- Python tooling uses `uv`; run `./launchpad view` or `./launchpad wine-audit`
+  to let `uv` resolve script dependencies.
 - Binary artifacts are marked as binary in `.gitattributes` to avoid noisy diffs.
 - crackmes.one archives use the password `crackmes.one`.
