@@ -11,8 +11,8 @@ cd crackme
 ./launchpad map
 ./launchpad list
 ./launchpad view
-./launchpad wine
-./launchpad ghidra
+./launchpad wine crackmes/crackme_1_TLOD/EasyCrackMe.exe
+./launchpad ghidra crackmes/crackme_1_TLOD/EasyCrackMe.exe
 ```
 
 Use a VM, container, or isolated Wine prefix for unknown binaries.

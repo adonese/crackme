@@ -26,6 +26,38 @@ Run:
 ./launchpad ghidra
 ```
 
+Open one executable with the low-friction path:
+
+```sh
+./launchpad ghidra crackmes/crackme_1_TLOD/EasyCrackMe.exe
+```
+
+This imports the file into a per-binary local project under
+`~/ghidra-projects/quick/`, runs analysis, then opens that `.gpr` in the Ghidra
+GUI. Re-running the same command opens the existing project. Use `--reimport`
+to refresh it from the executable.
+
+If you have the repo wrapper on your shell `PATH`, this also works from
+anywhere:
+
+```sh
+ghidra /path/to/some.exe
+```
+
+Install that wrapper with:
+
+```sh
+./launchpad install-ghidra
+```
+
+Useful variants:
+
+```sh
+./launchpad ghidra --import-only some.exe
+./launchpad ghidra --no-analysis some.exe
+./launchpad ghidra --project-dir /tmp/ghidra-projects some.exe
+```
+
 The launcher finds Ghidra in this order:
 
 1. `$GHIDRA_HOME/ghidraRun`
@@ -39,8 +71,8 @@ export GHIDRA_HOME=/path/to/ghidra
 ./launchpad ghidra
 ```
 
-Ghidra project databases are intentionally ignored. Create/import projects locally from
-the binaries in `crackmes/` and `practice/`.
+Ghidra project databases are intentionally ignored. Create/import projects
+locally from the binaries in `crackmes/` and `practice/`.
 
 The local import walkthrough is `docs/ghidra-import/README.md`.
 

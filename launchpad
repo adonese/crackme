@@ -7,7 +7,8 @@ usage() {
   cat <<'USAGE'
 Usage:
   ./launchpad wine [path]       Run a Windows crackme through Wine
-  ./launchpad ghidra [args...]  Start Ghidra
+  ./launchpad ghidra [file]     Start Ghidra, or import/open one executable
+  ./launchpad install-ghidra     Install a global ghidra wrapper in ~/.local/bin
   ./launchpad view [port]       Browse local Markdown/HTML/practice files
   ./launchpad map               Print the repo navigation map
   ./launchpad inventory [cmd]   Write or verify the tracked-file hash manifest
@@ -17,7 +18,8 @@ Examples:
   ./launchpad map
   ./launchpad wine
   ./launchpad wine crackmes/crackme_4_psyr3n/PIDXploit.exe
-  ./launchpad ghidra
+  ./launchpad ghidra crackmes/crackme_1_TLOD/EasyCrackMe.exe
+  ./launchpad install-ghidra
   ./launchpad view
   ./launchpad inventory verify
 USAGE
@@ -32,6 +34,19 @@ case "$cmd" in
   ghidra)
     shift
     exec "$ROOT/launchpads/ghidra.sh" "$@"
+    ;;
+  install-ghidra)
+    mkdir -p "$HOME/.local/bin"
+    wrapper="$HOME/.local/bin/ghidra"
+    {
+      printf '%s\n' '#!/usr/bin/env bash'
+      printf 'exec %q ghidra "$@"\n' "$ROOT/launchpad"
+    } > "$wrapper"
+    chmod +x "$wrapper"
+    echo "Installed $wrapper"
+    if [[ ":$PATH:" != *":$HOME/.local/bin:"* ]]; then
+      echo "Add $HOME/.local/bin to PATH to use: ghidra <file>" >&2
+    fi
     ;;
   view)
     shift
