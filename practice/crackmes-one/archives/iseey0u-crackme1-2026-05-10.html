@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://crackmes.one" />
+        <meta property="og:title" content="iseey0u-re's CrackMe#1"/>
+        <meta property="og:image" content="/static/favicons/crackmes-logo.png"/>
+        <meta name="theme-color" content="#9acc14">
+        <link rel="icon" type="image/x-icon" href="/static/favicons/crackmes-logo.png">
+        <link rel="stylesheet" href="/static/css/spectre.min.css">
+        <link rel="stylesheet" href="/static/css/spectre-exp.min.css">
+        <link rel="stylesheet" href="/static/css/spectre-icons.min.css">
+        <link rel="stylesheet" href="/static/css/custom.css">
+        <script src='https://www.google.com/recaptcha/api.js'></script>
+        <title>iseey0u-re's CrackMe#1</title>
+        
+<meta property="og:description" content="A small crackme where things aren&#39;t always what they seem. Look closely at how the logic behaves. Be careful with your debugger!"/>
+
+    </head>
+    <body>
+        <style>
+            .off-canvas-sidebar.active {
+                transform: translateX(0);
+            }
+            .off-canvas-sidebar.active ~ .off-canvas-overlay {
+                display: block;
+            }
+        </style>
+        <script>
+            function toggleSidebar(id) {
+                var sidebar = document.getElementById(id);
+                if (sidebar) sidebar.classList.add('active');
+            }
+            function closeSidebar() {
+                document.querySelectorAll('.off-canvas-sidebar.active').forEach(function(s) {
+                    s.classList.remove('active');
+                });
+                if (window.location.hash) {
+                    history.replaceState(null, '', window.location.pathname + window.location.search);
+                }
+            }
+        </script>
+        <header class="navbar hide-xs">
+    <section class="navbar-section">
+        <h2><a href="/" class="title-navbar">crackmes.one</a></h2>
+    </section>
+    <section class="navbar-center">
+        -
+    </section>
+
+    
+
+<section class="navbar-section">
+    <a href="/search" class="btn btn-link">Search</a>
+    <a href="/lasts/1" class="btn btn-link">Latest Crackmes</a>
+    <a href="/faq" class="btn btn-link">Faq</a>
+    <a href="https://discord.gg/2pPV3yq" class="btn btn-link">Discord</a>
+    <a href="https://blog.crackmes.one/" class="btn btn-link" target="_blank">Blog</a>
+    <a href="https://ctf.crackmes.one/" class="btn btn-link" target="_blank" style="color: #9acc14;">CTF</a>
+    <a href="/login" class="btn btn-link">Login</a>
+    <a href="/register" class="btn btn-link">Register</a>
+</section>
+</header>
+<div class="off-canvas show-xs">
+    <h2 class="text-center"><a href="/" class="title-navbar">crackmes.one</a></h2>
+    <a class="off-canvas-toggle btn btn-primary btn-action" href="#" onclick="toggleSidebar('sidebar-id-guest'); return false;">
+        <i class="icon icon-menu"></i>
+    </a>
+
+    <div id="sidebar-id-guest" class="off-canvas-sidebar">
+        <ul class="nav">
+            <li class="nav"><a href="/search" class="btn btn-link">Search</a>
+            <li class="nav"><a href="/lasts/1" class="btn btn-link">Latest Crackmes</a></li>
+            <li class="nav"><a href="/faq" class="btn btn-link">Faq</a></li>
+            <li class="nav"><a href="https://discord.gg/2pPV3yq" class="btn btn-link">Discord</a></li>
+            <li class="nav"><a href="https://blog.crackmes.one/" class="btn btn-link" target="_blank">Blog</a></li>
+            <li class="nav"><a href="https://ctf.crackmes.one/" class="btn btn-link" target="_blank" style="color: #9acc14;">CTF</a></li>
+            <li class="nav"><a href="/login" class="btn btn-link">Login</a></li>
+            <li class="nav"><a href="/register" class="btn btn-link">Register</a></li>
+        </ul>
+    </div>
+    <a class="off-canvas-overlay" href="#" onclick="closeSidebar(); return false;"></a>
+</div>
+
+        
+            
+        
+        
+<script language="javascript" type="text/javascript">
+    function changeTab1(id1, id2) {
+        document.getElementById(id1).style.display = 'none';
+        document.getElementById(id2).style.display = 'block';
+    }
+
+    function revealSpoiler(id) {
+        var hidden = document.getElementById('spoiler-hidden-' + id);
+        var content = document.getElementById('spoiler-content-' + id);
+        if (hidden && content) {
+            hidden.style.display = 'none';
+            content.style.display = 'inline';
+        }
+    }
+
+    function revealAllSpoilers() {
+        document.querySelectorAll('.spoiler-hidden').forEach(function(el) {
+            el.style.display = 'none';
+        });
+        document.querySelectorAll('[id^="spoiler-content-"]').forEach(function(el) {
+            el.style.display = 'inline';
+        });
+        var btn = document.getElementById('reveal-all-spoilers-btn');
+        if (btn) btn.style.display = 'none';
+    }
+
+    function openModal(id) {
+        var modal = document.getElementById(id);
+        if (modal) {
+            modal.classList.add('active');
+            var input = modal.querySelector('textarea, input:not([type="hidden"])');
+            if (input) setTimeout(function() { input.focus(); }, 100);
+        }
+    }
+
+    function closeModal() {
+        document.querySelectorAll('.modal.active').forEach(function(m) {
+            m.classList.remove('active');
+        });
+        if (window.location.hash) {
+            history.replaceState(null, '', window.location.pathname + window.location.search);
+        }
+    }
+
+    // Support direct links with hash (e.g., #modal-comment)
+    document.addEventListener('DOMContentLoaded', function() {
+        var hash = window.location.hash;
+        if (hash && hash.length > 1) {
+            var modalId = hash.substring(1);
+            var modal = document.getElementById(modalId);
+            if (modal && modal.classList.contains('modal')) {
+                openModal(modalId);
+                history.replaceState(null, '', window.location.pathname + window.location.search);
+            }
+        }
+    });
+</script>
+<style>
+    .spoiler-hidden {
+        background-color: #333;
+        color: #333;
+        padding: 2px 8px;
+        border-radius: 3px;
+        cursor: pointer;
+        user-select: none;
+    }
+    .spoiler-hidden:hover {
+        background-color: #555;
+    }
+    /* @mention autocomplete styles */
+    .mention-dropdown {
+        position: absolute;
+        background: #2a2a2a;
+        border: 1px solid #444;
+        border-radius: 4px;
+        max-height: 150px;
+        overflow-y: auto;
+        z-index: 1000;
+        display: none;
+        min-width: 120px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    }
+    .mention-dropdown.active {
+        display: block;
+    }
+    .mention-item {
+        padding: 6px 10px;
+        cursor: pointer;
+        color: #ddd;
+    }
+    .mention-item:hover,
+    .mention-item.selected {
+        background: #3a3a3a;
+        color: #fff;
+    }
+    .modal.active {
+        display: flex;
+    }
+</style>
+<div class="container grid-lg wrapper">
+    <h3><a href="/user/iseey0u-re">iseey0u-re</a>'s CrackMe#1</h3>
+    <div class="columns panel-background">
+        <div class="column col-3">
+            <p>Author:<br> <a href="/user/iseey0u-re">iseey0u-re</a></p>
+        </div>
+        <div class="column col-3">
+            <p>Language:<br> C/C++</p>
+        </div>
+        <div class="column col-3">
+            <p>Upload:<br> 2026-05-10 15:16</p>
+        </div>
+        <div class="column col-3" style="padding-right: 0rem; text-align: right;">
+            
+            <a href="/download/crackme/6a00a162d7ff92e1214c008d" class="btn active btn-lg btn-download" title="Password: crackmes.one">Download</a>
+        </div>
+
+        <div class="column col-3">
+            <p>Platform:<br>
+            Windows</p>
+        </div>
+        <div class="column col-3">
+            <p>Difficulty:<br> 2.2
+            
+        </div>
+        <div class="column col-3">
+            <p>Quality:<br> 4.7
+            
+        </div>
+        <div class="column col-3">
+            <p>Arch:<br> x86-64</p>
+        </div>
+
+        <div class="column col-3">
+            <p>Downloads:<br> 327</p>
+        </div>
+        <div class="column col-3">
+            <p>Size:<br> 209.00 KB</p>
+        </div>
+        <div class="column col-3">
+            <p>Writeups:<br> 1</p>
+        </div>
+        <div class="column col-3">
+            <p>Comments:<br> 5</p>
+        </div>
+
+        <div class="column col-12">
+            <div class="divider"></div>
+        </div>
+
+        <div class="column col-12">
+            <p><b>Description</b></p>
+            <p><span style="white-space: pre-line">A small crackme where things aren&#39;t always what they seem. Look closely at how the logic behaves. Be careful with your debugger!</span></p>
+            <div class="divider"></div>
+        </div>
+
+        <div class="column col-4" style="margin-bottom:20px;">
+            <ul class="tab tab-block" style="border-bottom: .05rem solid transparent;">
+                <li class="tab-item">
+                    <a onclick="changeTab1('solutions', 'comments')">Comments (5)</a>
+                </li>
+                <li class="tab-item">
+                    <a onclick="changeTab1('comments', 'solutions')">Writeups (1)</a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="column col-12" id="comments" style="display:none">
+            
+            <p>You must be logged in to post a comment</p>
+            
+            
+            <div style="margin-bottom: 1em;">
+                
+                <a href="/user/AdminX">AdminX</a> on 2026-05-12 03:47:
+                
+                <span id="spoiler-hidden-6a02a2db17539b5175d12247" class="spoiler-hidden" onclick="revealSpoiler('6a02a2db17539b5175d12247')">[Click to reveal]</span><span id="spoiler-content-6a02a2db17539b5175d12247" style="display: none; white-space: pre-line">Solved I confirmed the check only succeeds under a debugger and the real key changes then the xor of the eight byte constant yields the correct password.
+
+Hint: look at the peb debug flags and the key flip the obvious password appears only when not debugging</span>
+            </div>
+            
+            <div style="margin-bottom: 1em;">
+                
+                <a href="/user/liboxin">liboxin</a> on 2026-05-12 12:26:
+                
+                <span id="spoiler-hidden-6a031c8d17539b5175d12254" class="spoiler-hidden" onclick="revealSpoiler('6a031c8d17539b5175d12254')">[Click to reveal]</span><span id="spoiler-content-6a031c8d17539b5175d12254" style="display: none; white-space: pre-line"><a href="/user/iseey0u-re">@iseey0u-re</a> 
+An interesting Crackme, when the exe file under the debugger, the xor key will be changed from 93 to 109, and I finally solved this
+
+Enter the password: crackmes
+Success!</span>
+            </div>
+            
+            <div style="margin-bottom: 1em;">
+                
+                <a href="/user/SingleJingle11">SingleJingle11</a> on 2026-05-14 10:40:
+                
+                <span id="spoiler-hidden-6a05a6a58fab7bbca2730184" class="spoiler-hidden" onclick="revealSpoiler('6a05a6a58fab7bbca2730184')">[Click to reveal]</span><span id="spoiler-content-6a05a6a58fab7bbca2730184" style="display: none; white-space: pre-line">
+Correct password:
+
+crackmes
+
+Logic
+
+`main` is at `0x140001f90`.
+
+Important blocks:
+
+- `0x140001fcc` and following: direct PEB checks. If debugger state is visible, the program changes the character seed and appends decoy bytes.
+- `0x14000205d`: calls `IsDebuggerPresent`.
+- `0x14000207a`: tests the result. If no debugger is reported, it jumps to an early termination path at `0x14000228c`.
+- `0x14000213a`: writes the encoded constant bytes:
+
+```text
+3e 2f 3c 3e 36 30 38 2e
+```
+
+- `0x140002150` to `0x1400021a1`: loops over those bytes and XORs each with the seed byte.
+- `0x1400021c5` to `0x1400021d0`: compares the generated string length and bytes against the entered password.
+- `0x1400021d9`: success path prints `Success!`.
+- `0x1400021e2`: failure path prints `Fail!`.
+
+When the direct PEB checks are not tripped, the seed byte is `0x5d`. Decoding is:
+
+```text
+3e 2f 3c 3e 36 30 38 2e
+xor 5d
+= 63 72 61 63 6b 6d 65 73
+= crackmes
+```
+
+If the program sees a normal debugger through the PEB checks, it changes the seed to `0x6d` and inserts extra `0x14` bytes. That produces a misleading debugger-only comparison target
+</span>
+            </div>
+            
+            <div style="margin-bottom: 1em;">
+                
+                <a href="/user/eadrick0">eadrick0</a> on 2026-05-17 10:38:
+                
+                <span id="spoiler-hidden-6a099ac12b3df128c1df5be2" class="spoiler-hidden" onclick="revealSpoiler('6a099ac12b3df128c1df5be2')">[Click to reveal]</span><span id="spoiler-content-6a099ac12b3df128c1df5be2" style="display: none; white-space: pre-line"># CrackMe Solution: crackmes.exe
+
+**Password:** `crackmes`
+
+## Logic
+
+1. `IsDebuggerPresent()` → if `0`, `exit(0)` (killswitch)
+2. If debugger detected: `XOR key = 109` (wrong)
+3. Encrypted string: `&#34;&amp;gt;/&amp;lt;608.&#34;` (hex: `3E 2F 3C 3E 36 30 38 2E`)
+4. Decrypt with `key = 93` (no debugger):
+   ```
+   0x3E ^ 0x5D = &#39;c&#39;
+   0x2F ^ 0x5D = &#39;r&#39;
+   ... = &#34;crackmes&#34;
+   ```
+
+## Patches Applied
+
+| File Offset | Bytes | Effect |
+|-------------|-------|--------|
+| `+0x13D5` | `90 x28` | NOP PEB checks |
+| `+0x145D` | `BB 01 00 00 00 90` | Force debugger present |
+| `+0x147C` | `90 x6` | NOP exit jump |
+| `+0x149A` | `90 x4` | NOP wrong-key set |
+| `+0x14F6` | `90 x4` | NOP wrong-key set |
+
+Patched binary runs without debugger, uses key `93`, accepts **`crackmes`** → Success.</span>
+            </div>
+            
+            <div style="margin-bottom: 1em;">
+                
+                <a href="/user/Pk4Tech">Pk4Tech</a> on 2026-05-18 06:19:
+                <span style="white-space: pre-line">too easy jump</span>
+            </div>
+            
+            
+            
+            <div id="reveal-all-spoilers-btn" style="text-align: center; margin-top: 0.5em;">
+                <a href="#" onclick="revealAllSpoilers(); return false;" class="text-gray" style="font-size: 0.8em;">Show all spoilers</a>
+            </div>
+            
+        </div>
+        <div class="column col-12" id="solutions" style="display:none">
+            
+            <p>You must be logged in to submit a writeup</p>
+            
+            <div class="columns">
+                
+                <div class="column col-9">
+                    <p>Solution by <a href="/user/PratyushMohanty03">PratyushMohanty03</a> on 2026-05-14 19:19:<br/><span style="white-space: pre-line"></span></p>
+                </div>
+                <div class="column col-3">
+                    <a href="/static/solution/6a06205f17539b5175d1228c.zip" title="Password: crackmes.one">Download</a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="modal-comment">
+        <a href="#" onclick="closeModal(); return false;" class="modal-overlay" aria-label="Close"></a>
+        <div class="modal-container">
+            <div class="modal-header">
+                <a href="#" onclick="closeModal(); return false;" class="btn btn-clear float-right" aria-label="Close"></a>
+                <div class="modal-title h5">Write a comment</div>
+            </div>
+            <div class="modal-body">
+                <div class="content">
+                    <p>Share how awesome the crackme was or where you struggle to finish it! Stay polite and do not spoil the solution/flag!</p>
+                    <p>Please keep the comments section English-only.</p>
+                    <form action="/comment/6a00a162d7ff92e1214c008d" method="post">
+                        <input type="hidden" name="csrf_token" value="IjM4OWVkOGIwYzMxZTkxMjI0OThmZDkwM2QyOTk5MDY3NTZjM2Y5NWYi.ahLe_w.RtCODJxxy7z5-kfxZiR-GvRlS6k">
+                        <div style="position: relative;">
+                            <textarea name="comment" id="comment" placeholder="Leave a comment... use @username to mention others" style="width: 100%;" rows="5"></textarea>
+                            <div id="mention-dropdown" class="mention-dropdown"></div>
+                        </div>
+                        <label class="form-checkbox" style="margin-top: 10px;">
+                            <input type="checkbox" name="spoiler">
+                            <i class="form-icon"></i> Mark as spoiler (hides content until clicked)
+                        </label>
+                        <input type="submit" class="btn active float-right" value="Post a comment">
+                        
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="rate-diff">
+        <a href="#" onclick="closeModal(); return false;" class="modal-overlay" aria-label="Close"></a>
+        <div class="modal-container">
+            <div class="modal-header">
+                <a href="#" onclick="closeModal(); return false;" class="btn btn-clear float-right" aria-label="Close"></a>
+                <div class="modal-title h5">Rate the difficulty</div>
+            </div>
+            <div class="modal-body">
+                <div class="content">
+                    <p>How would you rate the difficulty of this crackme ?</p>
+                    <form action="/crackme/rate-diff/6a00a162d7ff92e1214c008d" method="post">
+                        <input type="hidden" name="csrf_token" value="IjM4OWVkOGIwYzMxZTkxMjI0OThmZDkwM2QyOTk5MDY3NTZjM2Y5NWYi.ahLe_w.RtCODJxxy7z5-kfxZiR-GvRlS6k">
+                        <select class="form-select" id="difficulty" name="difficulty" multiple="">
+                            <option value="1">1. Very Easy</option>
+                            <option value="2">2. Easy</option>
+                            <option value="3">3. Medium</option>
+                            <option value="4">4. Hard</option>
+                            <option value="5">5. Very Hard</option>
+                            <option value="6">6. Insane</option>
+                        </select>
+                        <input type="submit" class="btn active float-right" value="Rate!">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="rate-qual">
+    <a href="#" onclick="closeModal(); return false;" class="modal-overlay" aria-label="Close"></a>
+    <div class="modal-container">
+        <div class="modal-header">
+            <a href="#" onclick="closeModal(); return false;" class="btn btn-clear float-right" aria-label="Close"></a>
+            <div class="modal-title h5">Rate the quality</div>
+        </div>
+        <div class="modal-body">
+            <div class="content">
+                <p>How would you rate the quality of this crackme ?</p>
+                <form action="/crackme/rate-qual/6a00a162d7ff92e1214c008d" method="post">
+                    <input type="hidden" name="csrf_token" value="IjM4OWVkOGIwYzMxZTkxMjI0OThmZDkwM2QyOTk5MDY3NTZjM2Y5NWYi.ahLe_w.RtCODJxxy7z5-kfxZiR-GvRlS6k">
+                    <select class="form-select" id="quality" name="quality" multiple="">
+                        <option value="1">1. Very bad</option>
+                        <option value="2">2. Bad</option>
+                        <option value="3">3. Medium</option>
+                        <option value="4">4. Good</option>
+                        <option value="5">5. Very good</option>
+                        <option value="6">6. Excellent</option>
+                    </select>
+                    <input type="submit" class="btn active float-right" value="Rate!">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<footer class="container grid-lg wrapper" style="margin-top: 30px; text-align: center;">
+    <p>&copy; 2026 crackmes.one</p>
+</footer>
+
+<script>
+(function() {
+    var mentionTargets = ["AdminX", "Pk4Tech", "PratyushMohanty03", "SingleJingle11", "eadrick0", "iseey0u-re", "liboxin"];
+    var currentUser = null;
+    // Filter out current user from mention targets (can't mention yourself)
+    if (currentUser) {
+        mentionTargets = mentionTargets.filter(function(name) {
+            return name !== currentUser;
+        });
+    }
+    var textarea = document.getElementById('comment');
+    var dropdown = document.getElementById('mention-dropdown');
+    if (!textarea || !dropdown || mentionTargets.length === 0) return;
+
+    var selectedIndex = -1;
+    var mentionStart = -1;
+
+    function getCaretCoordinates(element, position) {
+        var div = document.createElement('div');
+        var style = getComputedStyle(element);
+        for (var prop of ['fontFamily', 'fontSize', 'fontWeight', 'wordWrap', 'whiteSpace', 'borderLeftWidth', 'borderTopWidth', 'paddingLeft', 'paddingTop', 'lineHeight']) {
+            div.style[prop] = style[prop];
+        }
+        div.style.position = 'absolute';
+        div.style.visibility = 'hidden';
+        div.style.whiteSpace = 'pre-wrap';
+        div.style.width = element.offsetWidth + 'px';
+        var text = element.value.substring(0, position);
+        div.textContent = text;
+        var span = document.createElement('span');
+        span.textContent = '|';
+        div.appendChild(span);
+        document.body.appendChild(div);
+        var coords = { top: span.offsetTop, left: span.offsetLeft };
+        document.body.removeChild(div);
+        return coords;
+    }
+
+    function showDropdown(filtered, query) {
+        if (filtered.length === 0) {
+            dropdown.classList.remove('active');
+            return;
+        }
+        dropdown.innerHTML = '';
+        filtered.forEach(function(name, i) {
+            var item = document.createElement('div');
+            item.className = 'mention-item' + (i === selectedIndex ? ' selected' : '');
+            item.textContent = '@' + name;
+            item.addEventListener('mousedown', function(e) {
+                e.preventDefault();
+                selectMention(name);
+            });
+            dropdown.appendChild(item);
+        });
+        var coords = getCaretCoordinates(textarea, mentionStart);
+        dropdown.style.top = (coords.top + 20) + 'px';
+        dropdown.style.left = coords.left + 'px';
+        dropdown.classList.add('active');
+    }
+
+    function selectMention(name) {
+        var before = textarea.value.substring(0, mentionStart);
+        var after = textarea.value.substring(textarea.selectionStart);
+        textarea.value = before + '@' + name + ' ' + after;
+        var newPos = mentionStart + name.length + 2;
+        textarea.setSelectionRange(newPos, newPos);
+        dropdown.classList.remove('active');
+        mentionStart = -1;
+        selectedIndex = -1;
+        textarea.focus();
+    }
+
+    function getCurrentMention() {
+        var pos = textarea.selectionStart;
+        var text = textarea.value.substring(0, pos);
+
+        // Find the start of current word (after last whitespace or start)
+        var wordStart = 0;
+        for (var i = text.length - 1; i >= 0; i--) {
+            if (/\s/.test(text[i])) {
+                wordStart = i + 1;
+                break;
+            }
+        }
+
+        // Check if current word starts with @
+        if (text[wordStart] !== '@') return null;
+
+        // Everything after @ is the query
+        var query = text.substring(wordStart + 1);
+        return { start: wordStart, query: query };
+    }
+
+    textarea.addEventListener('input', function() {
+        var mention = getCurrentMention();
+        if (!mention) {
+            dropdown.classList.remove('active');
+            mentionStart = -1;
+            return;
+        }
+        mentionStart = mention.start;
+        var query = mention.query.toLowerCase();
+        var filtered = mentionTargets.filter(function(name) {
+            return name.toLowerCase().indexOf(query) === 0;
+        });
+        selectedIndex = filtered.length > 0 ? 0 : -1;
+        showDropdown(filtered, query);
+    });
+
+    textarea.addEventListener('keydown', function(e) {
+        if (!dropdown.classList.contains('active')) return;
+        var items = dropdown.querySelectorAll('.mention-item');
+        if (e.key === 'ArrowDown') {
+            e.preventDefault();
+            selectedIndex = Math.min(selectedIndex + 1, items.length - 1);
+            items.forEach(function(it, i) { it.classList.toggle('selected', i === selectedIndex); });
+            if (items[selectedIndex]) items[selectedIndex].scrollIntoView({ block: 'nearest' });
+        } else if (e.key === 'ArrowUp') {
+            e.preventDefault();
+            selectedIndex = Math.max(selectedIndex - 1, 0);
+            items.forEach(function(it, i) { it.classList.toggle('selected', i === selectedIndex); });
+            if (items[selectedIndex]) items[selectedIndex].scrollIntoView({ block: 'nearest' });
+        } else if (e.key === 'Enter' || e.key === 'Tab') {
+            if (selectedIndex >= 0 && items[selectedIndex]) {
+                e.preventDefault();
+                var name = items[selectedIndex].textContent.substring(1);
+                selectMention(name);
+            }
+        } else if (e.key === 'Escape') {
+            dropdown.classList.remove('active');
+            mentionStart = -1;
+        }
+    });
+
+    textarea.addEventListener('blur', function() {
+        setTimeout(function() { dropdown.classList.remove('active'); }, 150);
+    });
+})();
+</script>
+
+        
+    </body>
+</html>

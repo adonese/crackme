@@ -1,0 +1,42 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+usage() {
+  cat <<'USAGE'
+Usage:
+  ./launchpad wine [path]       Run a Windows crackme through Wine
+  ./launchpad ghidra [args...]  Start Ghidra
+  ./launchpad list              List likely challenge binaries
+
+Examples:
+  ./launchpad wine
+  ./launchpad wine crackmes/crackme_4_psyr3n/PIDXploit.exe
+  ./launchpad ghidra
+USAGE
+}
+
+cmd="${1:-}"
+case "$cmd" in
+  wine)
+    shift
+    exec "$ROOT/launchpads/wine.sh" "$@"
+    ;;
+  ghidra)
+    shift
+    exec "$ROOT/launchpads/ghidra.sh" "$@"
+    ;;
+  list)
+    find "$ROOT/crackmes" "$ROOT/practice" -type f \
+      \( -iname '*.exe' -o -iname '*.scr' -o -iname '*.dll' -o -iname '*.bin' -o -iname '*.flp' \) \
+      -print | sed "s#^$ROOT/##" | sort
+    ;;
+  ""|-h|--help|help)
+    usage
+    ;;
+  *)
+    usage >&2
+    exit 2
+    ;;
+esac

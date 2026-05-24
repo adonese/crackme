@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://crackmes.one" />
+        <meta property="og:title" content="psyr3n's PIDXploit"/>
+        <meta property="og:image" content="/static/favicons/crackmes-logo.png"/>
+        <meta name="theme-color" content="#9acc14">
+        <link rel="icon" type="image/x-icon" href="/static/favicons/crackmes-logo.png">
+        <link rel="stylesheet" href="/static/css/spectre.min.css">
+        <link rel="stylesheet" href="/static/css/spectre-exp.min.css">
+        <link rel="stylesheet" href="/static/css/spectre-icons.min.css">
+        <link rel="stylesheet" href="/static/css/custom.css">
+        <script src='https://www.google.com/recaptcha/api.js'></script>
+        <title>psyr3n's PIDXploit</title>
+        
+<meta property="og:description" content="Thing to do: Not to bypass.
+Hint: Your Process ID."/>
+
+    </head>
+    <body>
+        <style>
+            .off-canvas-sidebar.active {
+                transform: translateX(0);
+            }
+            .off-canvas-sidebar.active ~ .off-canvas-overlay {
+                display: block;
+            }
+        </style>
+        <script>
+            function toggleSidebar(id) {
+                var sidebar = document.getElementById(id);
+                if (sidebar) sidebar.classList.add('active');
+            }
+            function closeSidebar() {
+                document.querySelectorAll('.off-canvas-sidebar.active').forEach(function(s) {
+                    s.classList.remove('active');
+                });
+                if (window.location.hash) {
+                    history.replaceState(null, '', window.location.pathname + window.location.search);
+                }
+            }
+        </script>
+        <header class="navbar hide-xs">
+    <section class="navbar-section">
+        <h2><a href="/" class="title-navbar">crackmes.one</a></h2>
+    </section>
+    <section class="navbar-center">
+        -
+    </section>
+
+    
+
+<section class="navbar-section">
+    <a href="/search" class="btn btn-link">Search</a>
+    <a href="/lasts/1" class="btn btn-link">Latest Crackmes</a>
+    <a href="/faq" class="btn btn-link">Faq</a>
+    <a href="https://discord.gg/2pPV3yq" class="btn btn-link">Discord</a>
+    <a href="https://blog.crackmes.one/" class="btn btn-link" target="_blank">Blog</a>
+    <a href="https://ctf.crackmes.one/" class="btn btn-link" target="_blank" style="color: #9acc14;">CTF</a>
+    <a href="/login" class="btn btn-link">Login</a>
+    <a href="/register" class="btn btn-link">Register</a>
+</section>
+</header>
+<div class="off-canvas show-xs">
+    <h2 class="text-center"><a href="/" class="title-navbar">crackmes.one</a></h2>
+    <a class="off-canvas-toggle btn btn-primary btn-action" href="#" onclick="toggleSidebar('sidebar-id-guest'); return false;">
+        <i class="icon icon-menu"></i>
+    </a>
+
+    <div id="sidebar-id-guest" class="off-canvas-sidebar">
+        <ul class="nav">
+            <li class="nav"><a href="/search" class="btn btn-link">Search</a>
+            <li class="nav"><a href="/lasts/1" class="btn btn-link">Latest Crackmes</a></li>
+            <li class="nav"><a href="/faq" class="btn btn-link">Faq</a></li>
+            <li class="nav"><a href="https://discord.gg/2pPV3yq" class="btn btn-link">Discord</a></li>
+            <li class="nav"><a href="https://blog.crackmes.one/" class="btn btn-link" target="_blank">Blog</a></li>
+            <li class="nav"><a href="https://ctf.crackmes.one/" class="btn btn-link" target="_blank" style="color: #9acc14;">CTF</a></li>
+            <li class="nav"><a href="/login" class="btn btn-link">Login</a></li>
+            <li class="nav"><a href="/register" class="btn btn-link">Register</a></li>
+        </ul>
+    </div>
+    <a class="off-canvas-overlay" href="#" onclick="closeSidebar(); return false;"></a>
+</div>
+
+        
+            
+        
+        
+<script language="javascript" type="text/javascript">
+    function changeTab1(id1, id2) {
+        document.getElementById(id1).style.display = 'none';
+        document.getElementById(id2).style.display = 'block';
+    }
+
+    function revealSpoiler(id) {
+        var hidden = document.getElementById('spoiler-hidden-' + id);
+        var content = document.getElementById('spoiler-content-' + id);
+        if (hidden && content) {
+            hidden.style.display = 'none';
+            content.style.display = 'inline';
+        }
+    }
+
+    function revealAllSpoilers() {
+        document.querySelectorAll('.spoiler-hidden').forEach(function(el) {
+            el.style.display = 'none';
+        });
+        document.querySelectorAll('[id^="spoiler-content-"]').forEach(function(el) {
+            el.style.display = 'inline';
+        });
+        var btn = document.getElementById('reveal-all-spoilers-btn');
+        if (btn) btn.style.display = 'none';
+    }
+
+    function openModal(id) {
+        var modal = document.getElementById(id);
+        if (modal) {
+            modal.classList.add('active');
+            var input = modal.querySelector('textarea, input:not([type="hidden"])');
+            if (input) setTimeout(function() { input.focus(); }, 100);
+        }
+    }
+
+    function closeModal() {
+        document.querySelectorAll('.modal.active').forEach(function(m) {
+            m.classList.remove('active');
+        });
+        if (window.location.hash) {
+            history.replaceState(null, '', window.location.pathname + window.location.search);
+        }
+    }
+
+    // Support direct links with hash (e.g., #modal-comment)
+    document.addEventListener('DOMContentLoaded', function() {
+        var hash = window.location.hash;
+        if (hash && hash.length > 1) {
+            var modalId = hash.substring(1);
+            var modal = document.getElementById(modalId);
+            if (modal && modal.classList.contains('modal')) {
+                openModal(modalId);
+                history.replaceState(null, '', window.location.pathname + window.location.search);
+            }
+        }
+    });
+</script>
+<style>
+    .spoiler-hidden {
+        background-color: #333;
+        color: #333;
+        padding: 2px 8px;
+        border-radius: 3px;
+        cursor: pointer;
+        user-select: none;
+    }
+    .spoiler-hidden:hover {
+        background-color: #555;
+    }
+    /* @mention autocomplete styles */
+    .mention-dropdown {
+        position: absolute;
+        background: #2a2a2a;
+        border: 1px solid #444;
+        border-radius: 4px;
+        max-height: 150px;
+        overflow-y: auto;
+        z-index: 1000;
+        display: none;
+        min-width: 120px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    }
+    .mention-dropdown.active {
+        display: block;
+    }
+    .mention-item {
+        padding: 6px 10px;
+        cursor: pointer;
+        color: #ddd;
+    }
+    .mention-item:hover,
+    .mention-item.selected {
+        background: #3a3a3a;
+        color: #fff;
+    }
+    .modal.active {
+        display: flex;
+    }
+</style>
+<div class="container grid-lg wrapper">
+    <h3><a href="/user/psyr3n">psyr3n</a>'s PIDXploit</h3>
+    <div class="columns panel-background">
+        <div class="column col-3">
+            <p>Author:<br> <a href="/user/psyr3n">psyr3n</a></p>
+        </div>
+        <div class="column col-3">
+            <p>Language:<br> C/C++</p>
+        </div>
+        <div class="column col-3">
+            <p>Upload:<br> 2024-10-04 05:08</p>
+        </div>
+        <div class="column col-3" style="padding-right: 0rem; text-align: right;">
+            
+            <a href="/download/crackme/66ff78369b533b4c22bd0c5d" class="btn active btn-lg btn-download" title="Password: crackmes.one">Download</a>
+        </div>
+
+        <div class="column col-3">
+            <p>Platform:<br>
+            Windows</p>
+        </div>
+        <div class="column col-3">
+            <p>Difficulty:<br> 2.0
+            
+        </div>
+        <div class="column col-3">
+            <p>Quality:<br> 3.2
+            
+        </div>
+        <div class="column col-3">
+            <p>Arch:<br> x86</p>
+        </div>
+
+        <div class="column col-3">
+            <p>Downloads:<br> 170</p>
+        </div>
+        <div class="column col-3">
+            <p>Size:<br> 41.27 KB</p>
+        </div>
+        <div class="column col-3">
+            <p>Writeups:<br> 0</p>
+        </div>
+        <div class="column col-3">
+            <p>Comments:<br> 9</p>
+        </div>
+
+        <div class="column col-12">
+            <div class="divider"></div>
+        </div>
+
+        <div class="column col-12">
+            <p><b>Description</b></p>
+            <p><span style="white-space: pre-line">Thing to do: Not to bypass.
+Hint: Your Process ID.</span></p>
+            <div class="divider"></div>
+        </div>
+
+        <div class="column col-4" style="margin-bottom:20px;">
+            <ul class="tab tab-block" style="border-bottom: .05rem solid transparent;">
+                <li class="tab-item">
+                    <a onclick="changeTab1('solutions', 'comments')">Comments (9)</a>
+                </li>
+                <li class="tab-item">
+                    <a onclick="changeTab1('comments', 'solutions')">Writeups (0)</a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="column col-12" id="comments" style="display:none">
+            
+            <p>You must be logged in to post a comment</p>
+            
+            
+            <div style="margin-bottom: 1em;">
+                
+                <a href="/user/merfi">merfi</a> on 2024-10-30 18:39:
+                <span style="white-space: pre-line">I tracked the PID through the tasklist, I enter it into the program, but it prohibits entry. PID watched every time after re-entry</span>
+            </div>
+            
+            <div style="margin-bottom: 1em;">
+                
+                <a href="/user/forrst">forrst</a> on 2024-11-01 14:07:
+                <span style="white-space: pre-line">Cracked in under 5 mins XD</span>
+            </div>
+            
+            <div style="margin-bottom: 1em;">
+                
+                <a href="/user/dzwassim95">dzwassim95</a> on 2024-11-04 15:29:
+                <span style="white-space: pre-line">cracked under 1 min</span>
+            </div>
+            
+            <div style="margin-bottom: 1em;">
+                
+                <a href="/user/zxsrxt">zxsrxt</a> on 2024-11-05 19:04:
+                <span style="white-space: pre-line">cracked in 1 min by patching xd</span>
+            </div>
+            
+            <div style="margin-bottom: 1em;">
+                
+                <a href="/user/alxxx">alxxx</a> on 2024-11-11 07:37:
+                <span style="white-space: pre-line">Nice, basic BOF&#34;D:\PIDXploit.exe </span>
+            </div>
+            
+            <div style="margin-bottom: 1em;">
+                
+                <a href="/user/psyr3n">psyr3n</a> on 2024-11-21 13:36:
+                <span style="white-space: pre-line">Hope it&#39;d help you:  https://psyr3n.github.io/PIDXploit_Solution.pdf</span>
+            </div>
+            
+            <div style="margin-bottom: 1em;">
+                
+                <a href="/user/jhosuakz">jhosuakz</a> on 2025-01-09 11:22:
+                
+                <span id="spoiler-hidden-677fb1664d850ac5f7dc4ef1" class="spoiler-hidden" onclick="revealSpoiler('677fb1664d850ac5f7dc4ef1')">[Click to reveal]</span><span id="spoiler-content-677fb1664d850ac5f7dc4ef1" style="display: none; white-space: pre-line">import psutil
+exe = &#34;PIDXploit&#34;
+def find_pid(process_name):
+    pids = []
+    for process in psutil.process_iter([&#39;pid&#39;, &#39;name&#39;]):
+        try:
+            if process.info[&#39;name&#39;] and process_name.lower() in process.info[&#39;name&#39;].lower():
+                pids.append(process.info[&#39;pid&#39;])
+        except psutil.NoSuchProcess:
+            pass
+
+    return pids
+pid = find_pid(exe)
+if pid:
+    print(f&#34;Password : EndIsNear-{pid[0]}&#34;)</span>
+            </div>
+            
+            <div style="margin-bottom: 1em;">
+                
+                <a href="/user/rafok2v9c">rafok2v9c</a> on 2025-06-16 22:02:
+                <span style="white-space: pre-line">mov     dword ptr [esp+4], offset Format ; &#34;EndIsNear-procid&#34;</span>
+            </div>
+            
+            <div style="margin-bottom: 1em;">
+                
+                <a href="/user/z1xus">z1xus</a> on 2025-10-29 22:40:
+                <span style="white-space: pre-line">found solution for this on my drive https://gist.github.com/Z1xus/ece91bf02d8cf8d4c14c61c3c2910a8e</span>
+            </div>
+            
+            
+            
+            <div id="reveal-all-spoilers-btn" style="text-align: center; margin-top: 0.5em;">
+                <a href="#" onclick="revealAllSpoilers(); return false;" class="text-gray" style="font-size: 0.8em;">Show all spoilers</a>
+            </div>
+            
+        </div>
+        <div class="column col-12" id="solutions" style="display:none">
+            
+            <p>You must be logged in to submit a writeup</p>
+            
+            <div class="columns">
+                
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="modal-comment">
+        <a href="#" onclick="closeModal(); return false;" class="modal-overlay" aria-label="Close"></a>
+        <div class="modal-container">
+            <div class="modal-header">
+                <a href="#" onclick="closeModal(); return false;" class="btn btn-clear float-right" aria-label="Close"></a>
+                <div class="modal-title h5">Write a comment</div>
+            </div>
+            <div class="modal-body">
+                <div class="content">
+                    <p>Share how awesome the crackme was or where you struggle to finish it! Stay polite and do not spoil the solution/flag!</p>
+                    <p>Please keep the comments section English-only.</p>
+                    <form action="/comment/66ff78369b533b4c22bd0c5d" method="post">
+                        <input type="hidden" name="csrf_token" value="IjIwYTRlNGU5MWI4MTQzNTliZDJmZGVjZGMyMWJhOTlkMThhYzEwYWMi.ahLe-w.DKEjljscFbO9Q0w125kj9P3C3pA">
+                        <div style="position: relative;">
+                            <textarea name="comment" id="comment" placeholder="Leave a comment... use @username to mention others" style="width: 100%;" rows="5"></textarea>
+                            <div id="mention-dropdown" class="mention-dropdown"></div>
+                        </div>
+                        <label class="form-checkbox" style="margin-top: 10px;">
+                            <input type="checkbox" name="spoiler">
+                            <i class="form-icon"></i> Mark as spoiler (hides content until clicked)
+                        </label>
+                        <input type="submit" class="btn active float-right" value="Post a comment">
+                        
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="rate-diff">
+        <a href="#" onclick="closeModal(); return false;" class="modal-overlay" aria-label="Close"></a>
+        <div class="modal-container">
+            <div class="modal-header">
+                <a href="#" onclick="closeModal(); return false;" class="btn btn-clear float-right" aria-label="Close"></a>
+                <div class="modal-title h5">Rate the difficulty</div>
+            </div>
+            <div class="modal-body">
+                <div class="content">
+                    <p>How would you rate the difficulty of this crackme ?</p>
+                    <form action="/crackme/rate-diff/66ff78369b533b4c22bd0c5d" method="post">
+                        <input type="hidden" name="csrf_token" value="IjIwYTRlNGU5MWI4MTQzNTliZDJmZGVjZGMyMWJhOTlkMThhYzEwYWMi.ahLe-w.DKEjljscFbO9Q0w125kj9P3C3pA">
+                        <select class="form-select" id="difficulty" name="difficulty" multiple="">
+                            <option value="1">1. Very Easy</option>
+                            <option value="2">2. Easy</option>
+                            <option value="3">3. Medium</option>
+                            <option value="4">4. Hard</option>
+                            <option value="5">5. Very Hard</option>
+                            <option value="6">6. Insane</option>
+                        </select>
+                        <input type="submit" class="btn active float-right" value="Rate!">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="rate-qual">
+    <a href="#" onclick="closeModal(); return false;" class="modal-overlay" aria-label="Close"></a>
+    <div class="modal-container">
+        <div class="modal-header">
+            <a href="#" onclick="closeModal(); return false;" class="btn btn-clear float-right" aria-label="Close"></a>
+            <div class="modal-title h5">Rate the quality</div>
+        </div>
+        <div class="modal-body">
+            <div class="content">
+                <p>How would you rate the quality of this crackme ?</p>
+                <form action="/crackme/rate-qual/66ff78369b533b4c22bd0c5d" method="post">
+                    <input type="hidden" name="csrf_token" value="IjIwYTRlNGU5MWI4MTQzNTliZDJmZGVjZGMyMWJhOTlkMThhYzEwYWMi.ahLe-w.DKEjljscFbO9Q0w125kj9P3C3pA">
+                    <select class="form-select" id="quality" name="quality" multiple="">
+                        <option value="1">1. Very bad</option>
+                        <option value="2">2. Bad</option>
+                        <option value="3">3. Medium</option>
+                        <option value="4">4. Good</option>
+                        <option value="5">5. Very good</option>
+                        <option value="6">6. Excellent</option>
+                    </select>
+                    <input type="submit" class="btn active float-right" value="Rate!">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<footer class="container grid-lg wrapper" style="margin-top: 30px; text-align: center;">
+    <p>&copy; 2026 crackmes.one</p>
+</footer>
+
+<script>
+(function() {
+    var mentionTargets = ["alxxx", "dzwassim95", "forrst", "jhosuakz", "merfi", "psyr3n", "rafok2v9c", "z1xus", "zxsrxt"];
+    var currentUser = null;
+    // Filter out current user from mention targets (can't mention yourself)
+    if (currentUser) {
+        mentionTargets = mentionTargets.filter(function(name) {
+            return name !== currentUser;
+        });
+    }
+    var textarea = document.getElementById('comment');
+    var dropdown = document.getElementById('mention-dropdown');
+    if (!textarea || !dropdown || mentionTargets.length === 0) return;
+
+    var selectedIndex = -1;
+    var mentionStart = -1;
+
+    function getCaretCoordinates(element, position) {
+        var div = document.createElement('div');
+        var style = getComputedStyle(element);
+        for (var prop of ['fontFamily', 'fontSize', 'fontWeight', 'wordWrap', 'whiteSpace', 'borderLeftWidth', 'borderTopWidth', 'paddingLeft', 'paddingTop', 'lineHeight']) {
+            div.style[prop] = style[prop];
+        }
+        div.style.position = 'absolute';
+        div.style.visibility = 'hidden';
+        div.style.whiteSpace = 'pre-wrap';
+        div.style.width = element.offsetWidth + 'px';
+        var text = element.value.substring(0, position);
+        div.textContent = text;
+        var span = document.createElement('span');
+        span.textContent = '|';
+        div.appendChild(span);
+        document.body.appendChild(div);
+        var coords = { top: span.offsetTop, left: span.offsetLeft };
+        document.body.removeChild(div);
+        return coords;
+    }
+
+    function showDropdown(filtered, query) {
+        if (filtered.length === 0) {
+            dropdown.classList.remove('active');
+            return;
+        }
+        dropdown.innerHTML = '';
+        filtered.forEach(function(name, i) {
+            var item = document.createElement('div');
+            item.className = 'mention-item' + (i === selectedIndex ? ' selected' : '');
+            item.textContent = '@' + name;
+            item.addEventListener('mousedown', function(e) {
+                e.preventDefault();
+                selectMention(name);
+            });
+            dropdown.appendChild(item);
+        });
+        var coords = getCaretCoordinates(textarea, mentionStart);
+        dropdown.style.top = (coords.top + 20) + 'px';
+        dropdown.style.left = coords.left + 'px';
+        dropdown.classList.add('active');
+    }
+
+    function selectMention(name) {
+        var before = textarea.value.substring(0, mentionStart);
+        var after = textarea.value.substring(textarea.selectionStart);
+        textarea.value = before + '@' + name + ' ' + after;
+        var newPos = mentionStart + name.length + 2;
+        textarea.setSelectionRange(newPos, newPos);
+        dropdown.classList.remove('active');
+        mentionStart = -1;
+        selectedIndex = -1;
+        textarea.focus();
+    }
+
+    function getCurrentMention() {
+        var pos = textarea.selectionStart;
+        var text = textarea.value.substring(0, pos);
+
+        // Find the start of current word (after last whitespace or start)
+        var wordStart = 0;
+        for (var i = text.length - 1; i >= 0; i--) {
+            if (/\s/.test(text[i])) {
+                wordStart = i + 1;
+                break;
+            }
+        }
+
+        // Check if current word starts with @
+        if (text[wordStart] !== '@') return null;
+
+        // Everything after @ is the query
+        var query = text.substring(wordStart + 1);
+        return { start: wordStart, query: query };
+    }
+
+    textarea.addEventListener('input', function() {
+        var mention = getCurrentMention();
+        if (!mention) {
+            dropdown.classList.remove('active');
+            mentionStart = -1;
+            return;
+        }
+        mentionStart = mention.start;
+        var query = mention.query.toLowerCase();
+        var filtered = mentionTargets.filter(function(name) {
+            return name.toLowerCase().indexOf(query) === 0;
+        });
+        selectedIndex = filtered.length > 0 ? 0 : -1;
+        showDropdown(filtered, query);
+    });
+
+    textarea.addEventListener('keydown', function(e) {
+        if (!dropdown.classList.contains('active')) return;
+        var items = dropdown.querySelectorAll('.mention-item');
+        if (e.key === 'ArrowDown') {
+            e.preventDefault();
+            selectedIndex = Math.min(selectedIndex + 1, items.length - 1);
+            items.forEach(function(it, i) { it.classList.toggle('selected', i === selectedIndex); });
+            if (items[selectedIndex]) items[selectedIndex].scrollIntoView({ block: 'nearest' });
+        } else if (e.key === 'ArrowUp') {
+            e.preventDefault();
+            selectedIndex = Math.max(selectedIndex - 1, 0);
+            items.forEach(function(it, i) { it.classList.toggle('selected', i === selectedIndex); });
+            if (items[selectedIndex]) items[selectedIndex].scrollIntoView({ block: 'nearest' });
+        } else if (e.key === 'Enter' || e.key === 'Tab') {
+            if (selectedIndex >= 0 && items[selectedIndex]) {
+                e.preventDefault();
+                var name = items[selectedIndex].textContent.substring(1);
+                selectMention(name);
+            }
+        } else if (e.key === 'Escape') {
+            dropdown.classList.remove('active');
+            mentionStart = -1;
+        }
+    });
+
+    textarea.addEventListener('blur', function() {
+        setTimeout(function() { dropdown.classList.remove('active'); }, 150);
+    });
+})();
+</script>
+
+        
+    </body>
+</html>

@@ -1,0 +1,26 @@
+# Local Ghidra workspace state. Keep challenge files and writeups in git,
+# recreate project databases locally when needed.
+*.gpr
+*.rep/
+*.lock
+*.lock~
+
+# Wine/runtime state.
+.wine-prefix/
+.wine/
+
+# Python/editor/system noise.
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+
+# Local analysis outputs.
+/core
+core.*
+*.dmp
+*.log
+*.tmp

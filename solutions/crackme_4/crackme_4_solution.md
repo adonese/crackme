@@ -45,7 +45,7 @@ The ```generate_password()``` function takes ```char pass_real``` array variable
 Now we're getting close to the origin of this wizardry! You see the ```generate_password()``` takes the pointer to array (empty char array ```buffer_string```) and then this happenes:
 
 - [Line 7] ```PID_string```  variable (yes, it is declared as int, but later it will be used as a part of a string) is initialized with the value of ```_getpid()``` function, which is obviously gets the PID of current process
-- [Line 8] ```_sprintf()``` function takes the ```PID_string``` value, some string ```"TheEndIsNear-%d"``` and ```buffer_string```. But what is the purpose of ```_sprintf()``` function? Is it like ```printf()``` function? Not really. According to [this](https://cplusplus.com/reference/cstdio/sprintf/) documentation it takes 3 arguments (the 3rd is optional):
+- [Line 8] ```_sprintf()``` function takes the ```PID_string``` value, some string ```"EndIsNear-%d"``` and ```buffer_string```. But what is the purpose of ```_sprintf()``` function? Is it like ```printf()``` function? Not really. According to [this](https://cplusplus.com/reference/cstdio/sprintf/) documentation it takes 3 arguments (the 3rd is optional):
   - 1 -> **pointer** to a **string buffer** where the resulting C-string is stored
   - 2 -> the C string that contains a **format string** that follows the same specifications as **format** in ```printf()```
   - 3 -> depending on the **format string**, the function ```sprintf()``` may expect a sequence of additional arguments, each containing a value to be used to replace a **format specifier** in the **format string**
@@ -59,9 +59,9 @@ Therefore, we have:
 
 And only then the final result from the 2 argument will be written to ```*buffer_string```.
 
-So? Does ```_sprintf()``` function return anything at all? No. The trick is that ```*buffer_string``` that ```generate_password``` accepts as an argument and which again is used by ```_sprintf()``` is a POINTER to other variable! ```pass_real``` inside ```main()``` function. It is empty when the program starts and only after ```generate_password()``` executes the ```pass_real``` variable (which is an array of char) is filled with the data from ```_sprintf()``` which writes the final string ```"TheEndIsNear-%d"``` to ```buffer_string```.
+So? Does ```_sprintf()``` function return anything at all? No. The trick is that ```*buffer_string``` that ```generate_password``` accepts as an argument and which again is used by ```_sprintf()``` is a POINTER to other variable! ```pass_real``` inside ```main()``` function. It is empty when the program starts and only after ```generate_password()``` executes the ```pass_real``` variable (which is an array of char) is filled with the data from ```_sprintf()``` which writes the final string ```"EndIsNear-%d"``` to ```buffer_string```.
 
-```"TheEndIsNear-%d"``` is the password. Well, to be precise the password is ```"TheEndIsNear-[PID]"```, where ```PID``` is the value of crackme process ```PID```.
+```"EndIsNear-%d"``` is the password. Well, to be precise the password is ```"EndIsNear-[PID]"```, where ```PID``` is the value of crackme process ```PID```.
 Time to prove our words.
 
 <img src = "https://github.com/Marco888Space/Reverse-Engineering-crackmes-with-Ghidra/blob/main/solutions/crackme_4/11.PNG">
