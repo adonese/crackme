@@ -42,6 +42,8 @@ export GHIDRA_HOME=/path/to/ghidra
 Ghidra project databases are intentionally ignored. Create/import projects locally from
 the binaries in `crackmes/` and `practice/`.
 
+The local import walkthrough is `docs/ghidra-import/README.md`.
+
 ## Repo Viewer
 
 Run:
@@ -67,3 +69,21 @@ HTML, source files, PDFs, images, archives, and binaries; renders Markdown and
 source files; previews HTML/PDF/image files; and shows basic metadata for
 binaries. It runs through `uv`, and the script metadata asks `uv` to install
 Pygments for source highlighting.
+
+## Inventory
+
+Write or refresh the tracked-file checksum manifest:
+
+```sh
+./launchpad inventory write
+```
+
+Verify the current checkout against the manifest:
+
+```sh
+./launchpad inventory verify
+```
+
+The manifest records SHA-256 hashes for tracked and unignored files, excluding
+the manifest itself. It is useful after folder moves or after redownloading
+practice bundles.

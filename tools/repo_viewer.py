@@ -155,17 +155,17 @@ def kind_for(path: Path) -> str:
 def category_for(path: str, kind: str) -> str:
     if path.startswith("solutions/"):
         return "Solutions"
-    if path.startswith("docs/") or path in {"README.md", "Import_and_create_project_tutorial.md"}:
+    if path.startswith("docs/") or path == "README.md":
         return "Repo Docs"
     if path.startswith("crackmes/"):
         return "Original Crackmes"
-    if path.startswith("practice/crackmes-one/"):
-        return "crackmes.one"
-    if path.startswith("practice/crackmes-one-ctf-2026/"):
-        return "crackmes.one CTF 2026"
-    if path.startswith("practice/nightmare/"):
+    if path.startswith("practice/crackmes/"):
+        return "Extra Crackmes"
+    if path.startswith("practice/ctf/"):
+        return "CTF Practice"
+    if path.startswith("practice/courses/nightmare/"):
         return "Nightmare"
-    if path.startswith("practice/pwncollege"):
+    if path.startswith("practice/courses/pwncollege"):
         return "pwn.college"
     if path.startswith("practice/"):
         return "Practice"
@@ -527,6 +527,8 @@ h1 { font-size: 16px; margin: 0 0 10px; }
 input, select, button { width: 100%; padding: 8px 10px; border: 1px solid var(--line); border-radius: 4px; background: #0f0f0f; color: var(--text); font: inherit; }
 button { cursor: pointer; background: var(--panel2); }
 button:hover, .item:hover { border-color: var(--accent); }
+.quick { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px; margin-top: 10px; }
+.quick button { padding: 6px 8px; font-size: 12px; }
 .meta { color: var(--muted); font-size: 12px; line-height: 1.4; }
 #list { height: calc(100vh - 177px); overflow: auto; padding: 8px; }
 .item { display: block; width: 100%; text-align: left; border: 1px solid transparent; border-radius: 4px; padding: 8px; margin: 0 0 6px; background: transparent; color: var(--text); }
@@ -575,6 +577,7 @@ iframe { width: 100%; height: calc(100vh - 58px); border: 0; background: white; 
         <select id="category"></select>
         <select id="kind"></select>
       </div>
+      <div class="quick" id="quick"></div>
       <div class="meta" id="counts"></div>
     </header>
     <div id="list"></div>
@@ -597,6 +600,14 @@ iframe { width: 100%; height: calc(100vh - 58px); border: 0; background: white; 
 let entries = [];
 let filtered = [];
 let selectedPath = "";
+const quickPaths = [
+  ["Map", "docs/MAP.md"],
+  ["Routes", "practice/ROUTES.md"],
+  ["Practice", "practice/INDEX.md"],
+  ["Tools", "docs/TOOLS.md"],
+  ["Crackmes", "crackmes/README.md"],
+  ["Solutions", "solutions/README.md"]
+];
 
 const el = id => document.getElementById(id);
 
@@ -613,6 +624,11 @@ function initFilters() {
   const kinds = [...new Set(entries.map(e => e.kind))].sort();
   el("category").innerHTML = optionList(categories, "all categories");
   el("kind").innerHTML = optionList(kinds, "all kinds");
+  const available = new Set(entries.map(e => e.path));
+  el("quick").innerHTML = quickPaths
+    .filter(([, path]) => available.has(path))
+    .map(([label, path]) => `<button class="quick-link" data-path="${escapeHtml(path)}">${escapeHtml(label)}</button>`)
+    .join("");
 }
 
 function applyFilters() {
@@ -680,6 +696,8 @@ async function openPath(path, push = true) {
 document.addEventListener("click", ev => {
   const button = ev.target.closest(".item");
   if (button) openPath(button.dataset.path);
+  const quick = ev.target.closest(".quick-link");
+  if (quick) openPath(quick.dataset.path);
 });
 
 ["q", "category", "kind"].forEach(id => el(id).addEventListener("input", applyFilters));
@@ -693,7 +711,7 @@ fetch("/api/index").then(r => r.json()).then(data => {
   initFilters();
   applyFilters();
   const params = new URLSearchParams(location.hash.replace(/^#/, ""));
-  const initial = params.get("path") || "practice/INDEX.md";
+  const initial = params.get("path") || "docs/MAP.md";
   if (entries.some(e => e.path === initial)) openPath(initial, false);
 });
 </script>

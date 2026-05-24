@@ -8,6 +8,7 @@ crackme ladders.
 ```sh
 git clone https://github.com/adonese/crackme.git
 cd crackme
+./launchpad map
 ./launchpad list
 ./launchpad view
 ./launchpad wine
@@ -18,14 +19,16 @@ Use a VM, container, or isolated Wine prefix for unknown binaries.
 
 ## Layout
 
+- `docs/MAP.md` - the repo map. Start here when the tree feels noisy.
 - `crackmes/` - the original four tutorial crackmes.
 - `solutions/` - Ghidra-oriented walkthroughs for the original four crackmes.
-- `practice/` - broad local mirrors and indexes for crackmes.one, pwn.college,
-  Nightmare, and hosted-platform references.
+- `practice/crackmes/` - extra classic crackme downloads.
+- `practice/ctf/` - CTF challenge bundles with handouts, source, and solutions.
+- `practice/courses/` - larger course mirrors such as pwn.college and Nightmare.
 - `launchpad` and `launchpads/` - Wine and Ghidra launch helpers.
 - `tools/repo_viewer.py` - local browser for Markdown, HTML, PDFs, images,
   source files, and binary metadata. Python tooling runs through `uv`.
-- `docs/TOOLS.md` - launcher and tool setup notes.
+- `docs/TOOLS.md` - launcher, Ghidra, Wine, and inventory notes.
 
 ## Original Guided Set
 
@@ -40,16 +43,17 @@ Read the matching files under `solutions/` after attempting each binary.
 
 ## Extra Practice
 
-See `practice/README.md`.
+See `practice/README.md` and `practice/ROUTES.md`.
 
 The most useful local additions are:
 
-- `practice/crackmes-one/extracted/iseey0u-crackme1-2026-05-10/`
-- `practice/crackmes-one-ctf-2026/wallpaper/`
-- `practice/pwncollege-program-security-dojo/reverse-engineering/`
-- `practice/nightmare/modules/03-beginner_re/`
+- `practice/crackmes/crackmes-one/extracted/iseey0u-crackme1-2026-05-10/`
+- `practice/ctf/crackmes-one-ctf-2026/wallpaper/`
+- `practice/courses/pwncollege-program-security-dojo/reverse-engineering/`
+- `practice/courses/nightmare/modules/03-beginner_re/`
 
-For a broader map, read `practice/INDEX.md` and `practice/CURATION.md`.
+For a broader map, read `docs/MAP.md`, `practice/INDEX.md`, and
+`practice/CURATION.md`.
 
 ## Notes
 

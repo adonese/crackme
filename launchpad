@@ -9,13 +9,17 @@ Usage:
   ./launchpad wine [path]       Run a Windows crackme through Wine
   ./launchpad ghidra [args...]  Start Ghidra
   ./launchpad view [port]       Browse local Markdown/HTML/practice files
+  ./launchpad map               Print the repo navigation map
+  ./launchpad inventory [cmd]   Write or verify the tracked-file hash manifest
   ./launchpad list              List likely challenge binaries
 
 Examples:
+  ./launchpad map
   ./launchpad wine
   ./launchpad wine crackmes/crackme_4_psyr3n/PIDXploit.exe
   ./launchpad ghidra
   ./launchpad view
+  ./launchpad inventory verify
 USAGE
 }
 
@@ -41,6 +45,17 @@ case "$cmd" in
       exec uv run --script "$ROOT/tools/repo_viewer.py" --port "$port" "$@"
     fi
     exec uv run --script "$ROOT/tools/repo_viewer.py" "$@"
+    ;;
+  map)
+    sed -n '1,220p' "$ROOT/docs/MAP.md"
+    ;;
+  inventory)
+    shift
+    if ! command -v uv >/dev/null 2>&1; then
+      echo "uv is required for ./launchpad inventory. Install it from https://docs.astral.sh/uv/." >&2
+      exit 1
+    fi
+    exec uv run --script "$ROOT/tools/repo_inventory.py" "$@"
     ;;
   list)
     find "$ROOT/crackmes" "$ROOT/practice" -type f \

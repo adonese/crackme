@@ -12,11 +12,11 @@ Best match for the repo:
 
 - `../crackmes/`
 - `../solutions/`
-- `crackmes-one/`
-- `crackmes-one-ctf-2026/wallpaper/`
-- `crackmes-one-ctf-2026/FLRSCRNSVR/`
-- `crackmes-one-ctf-2026/Fatmike/`
-- `crackmes-one-ctf-2026/Fatmike_02/`
+- `crackmes/crackmes-one/`
+- `ctf/crackmes-one-ctf-2026/wallpaper/`
+- `ctf/crackmes-one-ctf-2026/FLRSCRNSVR/`
+- `ctf/crackmes-one-ctf-2026/Fatmike/`
+- `ctf/crackmes-one-ctf-2026/Fatmike_02/`
 
 These are closest to the Ghidra/Wine crackme workflow.
 
@@ -24,15 +24,15 @@ These are closest to the Ghidra/Wine crackme workflow.
 
 Good next steps once the basics feel easy:
 
-- `pwncollege-program-security-dojo/reverse-engineering/`
-- `nightmare/modules/00-intro/`
-- `nightmare/modules/01-intro_assembly/`
-- `nightmare/modules/02-intro_tooling/`
-- `nightmare/modules/03-beginner_re/`
-- `nightmare/modules/12-z3/`
-- `nightmare/modules/13-angr/`
-- `nightmare/modules/20-patching_and_jumping/`
-- `nightmare/modules/21-dot_net/`
+- `courses/pwncollege-program-security-dojo/reverse-engineering/`
+- `courses/nightmare/modules/00-intro/`
+- `courses/nightmare/modules/01-intro_assembly/`
+- `courses/nightmare/modules/02-intro_tooling/`
+- `courses/nightmare/modules/03-beginner_re/`
+- `courses/nightmare/modules/12-z3/`
+- `courses/nightmare/modules/13-angr/`
+- `courses/nightmare/modules/20-patching_and_jumping/`
+- `courses/nightmare/modules/21-dot_net/`
 
 These are still RE-first, with varying levels of automation or patching.
 
@@ -40,13 +40,13 @@ These are still RE-first, with varying levels of automation or patching.
 
 Useful for breadth and fun:
 
-- `crackmes-one-ctf-2026/FlipVM/`
-- `crackmes-one-ctf-2026/connected/`
-- `crackmes-one-ctf-2026/httpd/`
-- `nightmare/modules/22-movfuscation/`
-- `nightmare/modules/23-custom_architecture/`
-- `nightmare/modules/34-emulated_targets/`
-- `nightmare/modules/36-obfuscated_reversing/`
+- `ctf/crackmes-one-ctf-2026/FlipVM/`
+- `ctf/crackmes-one-ctf-2026/connected/`
+- `ctf/crackmes-one-ctf-2026/httpd/`
+- `courses/nightmare/modules/22-movfuscation/`
+- `courses/nightmare/modules/23-custom_architecture/`
+- `courses/nightmare/modules/34-emulated_targets/`
+- `courses/nightmare/modules/36-obfuscated_reversing/`
 
 These are less like normal key checks, but they build useful instincts around
 VMs, emulation, obfuscation, network-shaped logic, and unusual formats.
@@ -56,10 +56,10 @@ VMs, emulation, obfuscation, network-shaped logic, and unusual formats.
 Keep these because they are useful security practice, but treat them as a
 different lane from crackmes:
 
-- `pwncollege-program-security-dojo/program-security/`
-- `pwncollege-program-security-dojo/program-exploitation/`
-- `pwncollege-program-security-dojo/return-oriented-programming/`
-- `pwncollege-program-security-dojo/dynamic-allocator-misuse/`
+- `courses/pwncollege-program-security-dojo/program-security/`
+- `courses/pwncollege-program-security-dojo/program-exploitation/`
+- `courses/pwncollege-program-security-dojo/return-oriented-programming/`
+- `courses/pwncollege-program-security-dojo/dynamic-allocator-misuse/`
 - Nightmare modules from `04-bof_variable` onward when the topic is stack,
   heap, shellcoding, ROP, format strings, or allocator internals.
 
@@ -70,11 +70,11 @@ Ghidra crackmes.
 
 Useful to archive, but read carefully:
 
-- `crackmes-one-ctf-2026/A_MatterOfTime/`
-- `crackmes-one-ctf-2026/Matryoshka v2/`
-- `crackmes-one-ctf-2026/What did you type/`
-- `crackmes-one-ctf-2026/cryptpad/`
-- `crackmes-one-ctf-2026/moment/`
+- `ctf/crackmes-one-ctf-2026/A_MatterOfTime/`
+- `ctf/crackmes-one-ctf-2026/Matryoshka v2/`
+- `ctf/crackmes-one-ctf-2026/What did you type/`
+- `ctf/crackmes-one-ctf-2026/cryptpad/`
+- `ctf/crackmes-one-ctf-2026/moment/`
 
 Some upstream READMEs contain flags or intended solutions. Prefer `Handout/`
 first when present.
