@@ -49,6 +49,11 @@ This imports the file into a per-binary local project under
 GUI. Re-running the same command opens the existing project. Use `--reimport`
 to refresh it from the executable.
 
+After import, the launcher also runs a small Ghidra script that prints likely
+main/user-entry candidates and adds a `Main Candidate` bookmark. For example,
+the RedXen crackme reports `_WinMain@16 at 00401594`. Use `--no-main-hint` to
+skip that extra pass.
+
 If you have the repo wrapper on your shell `PATH`, this also works from
 anywhere:
 
@@ -67,6 +72,7 @@ Useful variants:
 ```sh
 ./launchpad ghidra --import-only some.exe
 ./launchpad ghidra --no-analysis some.exe
+./launchpad ghidra --no-main-hint some.exe
 ./launchpad ghidra --project-dir /tmp/ghidra-projects some.exe
 ```
 

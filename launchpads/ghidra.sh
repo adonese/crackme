@@ -15,6 +15,7 @@ Options:
   --import-only        Import/analyze the file, then stop before launching GUI
   --reimport           Re-import even if the per-file project already exists
   --no-analysis        Import without auto-analysis
+  --no-main-hint       Do not run the main-candidate helper script
   --project NAME       Use a specific project name instead of auto-naming
   --project-dir DIR    Store projects in DIR instead of ~/ghidra-projects/quick
 
@@ -114,6 +115,7 @@ analyze_headless="$ghidra_home/support/analyzeHeadless"
 import_only=0
 reimport=0
 analysis=1
+main_hint=1
 project_name=""
 project_dir="${GHIDRA_PROJECT_DIR:-$HOME/ghidra-projects/quick}"
 
@@ -133,6 +135,10 @@ while [[ $# -gt 0 ]]; do
       ;;
     --no-analysis)
       analysis=0
+      shift
+      ;;
+    --no-main-hint)
+      main_hint=0
       shift
       ;;
     --project)
@@ -196,6 +202,36 @@ project_name="${project_name:-$(project_name_for "$target")}"
 project_file="$project_dir/$project_name.gpr"
 mkdir -p "$project_dir"
 
+run_main_hint() {
+  if [[ "$analysis" -eq 0 || "$main_hint" -eq 0 ]]; then
+    return 0
+  fi
+  local script_dir="$ROOT/ghidra_scripts"
+  local script_name="FindMainCandidate.java"
+  if [[ ! -f "$script_dir/$script_name" ]]; then
+    return 0
+  fi
+
+  echo "[ghidra] finding main candidate"
+  local output status
+  set +e
+  output="$(bash "$analyze_headless" "$project_dir" "$project_name" \
+    -process "$(basename "$target")" \
+    -scriptPath "$script_dir" \
+    -postScript "$script_name" 2>&1)"
+  status=$?
+  set -e
+  if [[ "$status" -ne 0 ]]; then
+    printf '%s\n' "$output" >&2
+    return "$status"
+  fi
+  if grep -q 'SCRIPT ERROR' <<<"$output"; then
+    printf '%s\n' "$output" >&2
+    return 1
+  fi
+  printf '%s\n' "$output" | sed -n 's/^.*\(\[ghidra-main\].*\)$/\1/p' | sed 's/ (GhidraScript).*$//'
+}
+
 if [[ ! -f "$project_file" || "$reimport" -eq 1 ]]; then
   args=("$project_dir" "$project_name" -import "$target" -overwrite)
   if [[ "$analysis" -eq 0 ]]; then
@@ -214,6 +250,8 @@ else
   echo "[ghidra] opening existing project $project_file"
   echo "[ghidra] use --reimport to refresh it from $target"
 fi
+
+run_main_hint
 
 if [[ "$import_only" -eq 1 ]]; then
   echo "$project_file"
